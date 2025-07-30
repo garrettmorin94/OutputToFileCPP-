@@ -5,41 +5,42 @@
 using namespace std;
 
 
+//The function used to read the fahrenheit file and assign city name and record temperatures
 void ReadTempsF(vector<pair<string, int>> &TempList) {
-    ifstream TempsFarFS;
+    ifstream TempsFahrFS;
     string cityName;
     int TemperatureF;
-    int TemperatureC;
-    string cityAndTemp;
 
-    TempsFarFS.open("FahrenheitTemperature.txt");
+    TempsFahrFS.open("FahrenheitTemperature.txt");  //Open the file
 
-    if (!TempsFarFS.is_open()) {
+    if (!TempsFahrFS.is_open()) {  //check to see if fileopen successfully, if not, error message displays
         cout << "Could not open file reviews.txt." << endl;
     }
     else {
-        TempsFarFS >> cityName;
-        TempsFarFS >> TemperatureF;
+        TempsFahrFS >> cityName; //start recording each city and temperature in fahrenheit
+        TempsFahrFS >> TemperatureF;
 
-        while (!TempsFarFS.fail()) {
-            TempList.emplace_back(cityName, TemperatureF);
-            TempsFarFS >> cityName;
-            TempsFarFS >> TemperatureF;
+        while (!TempsFahrFS.fail()) { //keep running loop until EOF is reached
+            TempList.emplace_back(cityName, TemperatureF); //used emplace to create a pair within the vector
+            TempsFahrFS >> cityName;
+            TempsFahrFS >> TemperatureF;
         }
 
-        TempsFarFS.close();
+        TempsFahrFS.close(); //close file
     }
 }
 
 
-
+//This function will display our original file's contents
 void DisplayTemps(vector <pair<string, int>> &TempList) {
-    cout << endl << "CITY TEMPERATURES IN FARENHEIT: " << endl << endl;
+    cout << endl << "CITY TEMPERATURES IN FAHRENHEIT: " << endl << endl;
     for (const auto& pair : TempList) {
         cout <<"City: "<<pair.first << " Temperature: " << pair.second << endl;
     }
     }
 
+
+//This function will take the temperatures from the original file, convert them to celsius and write them to a new file
 void SaveTempC(vector<pair<string, int>> &TempList) {
     ofstream TEMPCFS;
     TEMPCFS.open("CelsiusTemperature.txt");
@@ -65,12 +66,11 @@ void SaveTempC(vector<pair<string, int>> &TempList) {
 
 int main() {
     vector <pair<string, int>> TempList;
-    string newReview;
 
-    // Read reviews from file into reviews vector and display
     ReadTempsF(TempList);
     DisplayTemps(TempList);
     SaveTempC(TempList);
+
 
     return 0;
 }
