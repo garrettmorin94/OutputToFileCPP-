@@ -1,0 +1,6 @@
+Toronto Temperature: 8
+Lima Temperature: 18
+Istanbul Temperature: 13
+Lagos Temperature: 27
+Shanghai Temperature: 16
+Sydney Temperature: 17
